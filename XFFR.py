@@ -16,12 +16,14 @@ train_file = '38_Training_Data_Set_V2/training.csv'
 test_file = '38_Public_Test_Set_and_Submmision_Template_V2/public_x.csv'
 output_file = 'predictions_XGBoost_optimized.csv'
 
-# Step 1: Load training data
+# Step 1: Load and preprocess the training data
 print("Loading training data...")
 train_df = pd.read_csv(train_file)
+total_rows = len(train_df)
+print(f"Total rows in train.csv: {total_rows}")
 label_column = train_df.columns[-1]
-X = train_df.drop(columns=['ID', label_column])
-y = train_df[label_column]
+print(f"Class distribution in '{label_column}':")
+print(train_df[label_column].value_counts(normalize=True))
 
 # Clean data
 print("Cleaning data...")
